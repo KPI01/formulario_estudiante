@@ -68,31 +68,36 @@
         </fieldset>
         <input class="boton-enviar" type="submit" value="Enviar Datos">
         <?php
-        if (isset($_POST['c_nombre']) || isset($_POST['c_apellido']) || isset($_POST['c_genero']) || isset($_POST['c_idioma']) || isset($_POST['c_fechaNacimiento'])) {
-            $nombre = $_POST['c_nombre'];
-            $apellido = $_POST['c_apellido'];
-            $genero = $_POST['c_genero'];
-            $idiomas = $_POST['c_idioma'];
-            $fechaNacimiento = date('d-m-Y', strtotime($_POST['c_fechaNacimiento']));
-            $ciudadNacimiento = $_POST['c_ciudadNacimiento'];
-            $correo = $_POST['c_correo'];
-            $clave = $_POST['c_clave'];
+        $nombre = $_POST['c_nombre'] ?? null;
+        $infoEstudiante[] = $nombre;
+        $apellido = $_POST['c_apellido'] ?? null;
+        $infoEstudiante[] = $apellido;
+        $genero = $_POST['c_genero'] ?? null;
+        $infoEstudiante[] = $genero;
+        $idiomas = $_POST['c_idioma'] ?? null;
+        $infoEstudiante[] = $idiomas;
+        $fechaNacimiento = $_POST['c_fechaNacimiento'] ?? null;
+        $infoEstudiante[] = $fechaNacimiento;
+        $ciudadNacimiento = $_POST['c_ciudadNacimiento'] ?? null;
+        $infoEstudiante[] = $ciudadNacimiento;
+        $correo = $_POST['c_correo'] ?? null;
+        $infoEstudiante[] = $correo;
+        $clave = $_POST['c_clave'] ?? null;
+        $infoEstudiante[] = $clave;
 
-            echo "<p class='error'>".$nombre." ".$apellido."</p>";
-            echo "<p class='error'>".$genero."</p>";
-            foreach ($idiomas as $idioma)
-            {
-                echo "<p class='error'>".$idioma."</p>";
+        for ($i = 0; $i <= count($infoEstudiante); $i++) {
+            if (!empty($infoEstudiante[$i])) {
+                if (is_array($infoEstudiante[$i])) {
+                    for ($j = 0; $j < count($infoEstudiante[$i]); $j++) {
+                        echo "<p>" . $infoEstudiante[$i][$j] . "</p>";
+                    }
+                } else {
+                    echo "<p>" . $infoEstudiante[$i] . "</p>";
+                }
             }
-            echo "<p class='error'>".$fechaNacimiento."</p>";
-            echo "<p class='error'>".$ciudadNacimiento."</p>";
-            echo "<p class='error'>".$correo."</p>";
-            echo "<p class='error'>".$clave."</p>";
         }
-                    
         ?>
     </form>
-
 
 </body>
 
