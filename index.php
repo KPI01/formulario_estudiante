@@ -75,17 +75,24 @@ $clave = $_POST['c_clave'] ?? null;
         </fieldset>
         <input class="boton-enviar" type="submit" value="Enviar Datos" name="boton-enviar">
         <?php
-        $infoEstudiante[] = array($nombre,$apellido);
-        $infoEstudiante[] = $genero;
-        $infoEstudiante[] = $idiomasEst;
-        $infoEstudiante[] = $fechaNacimiento;
-        $infoEstudiante[] = $ciudadNacimiento;
-        $infoEstudiante[] = $correo;
-        $infoEstudiante[] = $clave;
-
         //Primero se comprueba que se hizo click en el boton para enviar los datos
         if (isset($_POST["boton-enviar"])) {
-            echo "<p>Has hecho click</p>";
+            if (isset($nombre)&&empty($nombre)) echo "<p class='error'>* Debes colocar el nombre</p>";
+            if (isset($apellido)&&empty($apellido)) echo "<p class='error'>* Debes colocar el apellido</p>";
+            if (empty($genero)) echo "<p class='error'>* Debes seleccionar el género</p>";
+            if ((isset($idiomasEst)&&count($idiomasEst)<3)||(empty($idiomasEst))) echo "<p class='error'>* Debes seleccionar al menos 3 idiomas</p>";
+            if (isset($fechaNacimiento)&&empty($fechaNacimiento)) echo "<p class='error'>* Debes colocar la fecha de nacimiento</p>";
+            if (empty($ciudadNacimiento)) echo "<p class='error'>* Debes colocar la ciudad de nacimiento</p>";
+            if (isset($correo)&&empty($correo)) {
+                echo "<p class='error'>* Debes colocar el correo</p>";
+            } else {
+                //Aqui va el codigo para comprobar el correo
+            }
+            if (isset($clave)&&empty($clave)) {
+                echo "<p class='error'>* Debes colocar una clave</p>";
+            } else {
+                //Aqui va el codigo para comprobar la salud de la clave
+            }
         }
         ?>
     </form>
