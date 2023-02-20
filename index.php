@@ -1,5 +1,12 @@
 <?php
-//Se determina si la variable esta definida y no es null
+$nombre = $_POST['c_nombre'] ?? null;
+$apellido = $_POST['c_apellido'] ?? null;
+$genero = $_POST['c_genero'] ?? null;
+$idiomas = $_POST['c_idioma'] ?? null;
+$fechaNacimiento = $_POST['c_fechaNacimiento'] ?? null;
+$ciudadNacimiento = $_POST['c_ciudadNacimiento'] ?? null;
+$correo = $_POST['c_correo'] ?? null;
+$clave = $_POST['c_clave'] ?? null;
 ?>
 
 <!DOCTYPE html>
@@ -19,27 +26,27 @@
         <h3>Datos del estudiante</h3>
         <fieldset>
             <legend>Nombre completo</legend>
-            <input type="text" name="c_nombre" placeholder="Nombre(s)">
-            <input type="text" name="c_apellido" id="c_apellido" placeholder="Apellido(s)">
+            <input type="text" name="c_nombre" placeholder="Nombre(s)" value='<?php echo $nombre??''?>'>
+            <input type="text" name="c_apellido" id="c_apellido" placeholder="Apellido(s)" value='<?php echo $apellido??''?>'>
         </fieldset>
         <fieldset class="caja genero" name="caja-genero">
             <legend>Género:</legend>
-            <input type="radio" name="c_genero" id="masculino" value="masculino">
+            <input type="radio" name="c_genero" id="masculino" value="Masculino" <?php if (!empty($genero)||$genero=="Masculino") echo "checked" ?>>
             <label for="masculino">Masculino</label>
-            <input type="radio" name="c_genero" id="femenino" value="femenino">
+            <input type="radio" name="c_genero" id="femenino" value="Femenino" <?php if (!empty($genero)||$genero=="Femenino") echo "checked" ?>>
             <label for="femenino">Femenino</label>
         </fieldset>
         <fieldset name="seleccion-idioma">
             <legend>Idioma:</legend>
-            <input type="checkbox" name="c_idioma[]" id="español" value="español">
+            <input type="checkbox" name="c_idioma[]" id="español" value="Español">
             <label for="español">Español</label>
-            <input type="checkbox" name="c_idioma[]" id="ingles" value="ingles">
+            <input type="checkbox" name="c_idioma[]" id="ingles" value="Inglés">
             <label for="ingles">Inglés</label>
-            <input type="checkbox" name="c_idioma[]" id="frances" value="frances">
+            <input type="checkbox" name="c_idioma[]" id="frances" value="Francés">
             <label for="frances">Francés</label>
-            <input type="checkbox" name="c_idioma[]" id="portugues" value="portugues">
+            <input type="checkbox" name="c_idioma[]" id="portugues" value="Portugués">
             <label for="portugues">Portugués</label>
-            <input type="checkbox" name="c_idioma[]" id="italiano" value="italiano">
+            <input type="checkbox" name="c_idioma[]" id="italiano" value="Italiano">
             <label for="Italiano">Italiano</label>
         </fieldset>
         <fieldset>
@@ -49,16 +56,16 @@
             <label for="c_ciudadNacimiento">Ciudad:</label>
             <select name="c_ciudadNacimiento" id="c_ciudadNacimiento">
                 <option disabled selected>Selecciona una ciudad</option>
-                <option value="maracay">Maracay</option>
-                <option value="caracas">Caracas</option>
-                <option value="valencia">Valencia</option>
-                <option value="barinas">Barinas</option>
-                <option value="maturin">Maturin</option>
-                <option value="trujillo">Trujillo</option>
-                <option value="maracaibo">Maracaibo</option>
-                <option value="barquisimeto">Barquisimeto</option>
-                <option value="merida">Mérida</option>
-                <option value="barcelona">Barcelona</option>
+                <option value="Maracay">Maracay</option>
+                <option value="Caracas">Caracas</option>
+                <option value="Valencia">Valencia</option>
+                <option value="Barinas">Barinas</option>
+                <option value="Maturin">Maturin</option>
+                <option value="Trujillo">Trujillo</option>
+                <option value="Maracaibo">Maracaibo</option>
+                <option value="Barquisimeto">Barquisimeto</option>
+                <option value="Merida">Mérida</option>
+                <option value="Barcelona">Barcelona</option>
             </select>
         </fieldset>
         <fieldset class="caja sesion">
@@ -68,21 +75,13 @@
         </fieldset>
         <input class="boton-enviar" type="submit" value="Enviar Datos">
         <?php
-        $nombre = $_POST['c_nombre'] ?? null;
         $infoEstudiante[] = $nombre;
-        $apellido = $_POST['c_apellido'] ?? null;
         $infoEstudiante[] = $apellido;
-        $genero = $_POST['c_genero'] ?? null;
         $infoEstudiante[] = $genero;
-        $idiomas = $_POST['c_idioma'] ?? null;
         $infoEstudiante[] = $idiomas;
-        $fechaNacimiento = $_POST['c_fechaNacimiento'] ?? null;
         $infoEstudiante[] = $fechaNacimiento;
-        $ciudadNacimiento = $_POST['c_ciudadNacimiento'] ?? null;
         $infoEstudiante[] = $ciudadNacimiento;
-        $correo = $_POST['c_correo'] ?? null;
         $infoEstudiante[] = $correo;
-        $clave = $_POST['c_clave'] ?? null;
         $infoEstudiante[] = $clave;
 
         for ($i = 0; $i <= count($infoEstudiante); $i++) {
