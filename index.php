@@ -55,7 +55,7 @@ $clave = $_POST['c_clave'] ?? null;
             <input type="date" name="c_fechaNacimiento">
             <label for="c_ciudadNacimiento">Ciudad:</label>
             <select name="c_ciudadNacimiento" id="c_ciudadNacimiento">
-                <option disabled selected>Selecciona una ciudad</option>
+                <option value="" disabled selected>Selecciona una ciudad</option>
                 <option value="Maracay">Maracay</option>
                 <option value="Caracas">Caracas</option>
                 <option value="Valencia">Valencia</option>
