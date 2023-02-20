@@ -31,22 +31,22 @@ $clave = $_POST['c_clave'] ?? null;
         </fieldset>
         <fieldset class="caja genero" name="caja-genero">
             <legend>Género:</legend>
-            <input type="radio" name="c_genero" id="masculino" value="Masculino" <?php if (!empty($genero)||$genero=="Masculino") echo "checked" ?>>
+            <input type="radio" name="c_genero" id="masculino" value="Masculino" <?php if (!empty($genero)&&$genero=="Masculino") echo "checked"; ?>>
             <label for="masculino">Masculino</label>
-            <input type="radio" name="c_genero" id="femenino" value="Femenino" <?php if (!empty($genero)||$genero=="Femenino") echo "checked" ?>>
+            <input type="radio" name="c_genero" id="femenino" value="Femenino" <?php if (!empty($genero)&&$genero=="Femenino") echo "checked"; ?>>
             <label for="femenino">Femenino</label>
         </fieldset>
         <fieldset name="seleccion-idioma">
             <legend>Idioma:</legend>
-            <input type="checkbox" name="c_idioma[]" id="español" value="Español">
+            <input type="checkbox" name="c_idioma[]" id="español" value="Español" <?php if(in_array("Español", $idiomas)) echo "checked"; ?>>
             <label for="español">Español</label>
-            <input type="checkbox" name="c_idioma[]" id="ingles" value="Inglés">
+            <input type="checkbox" name="c_idioma[]" id="ingles" value="Inglés" <?php if(in_array("Inglés", $idiomas)) echo "checked"; ?>>
             <label for="ingles">Inglés</label>
-            <input type="checkbox" name="c_idioma[]" id="frances" value="Francés">
+            <input type="checkbox" name="c_idioma[]" id="frances" value="Francés" <?php if(in_array("Francés", $idiomas)) echo "checked"; ?>>
             <label for="frances">Francés</label>
-            <input type="checkbox" name="c_idioma[]" id="portugues" value="Portugués">
+            <input type="checkbox" name="c_idioma[]" id="portugues" value="Portugués" <?php if(in_array("Portugués", $idiomas)) echo "checked"; ?>>
             <label for="portugues">Portugués</label>
-            <input type="checkbox" name="c_idioma[]" id="italiano" value="Italiano">
+            <input type="checkbox" name="c_idioma[]" id="italiano" value="Italiano" <?php if(in_array("Italiano", $idiomas)) echo "checked"; ?>>
             <label for="Italiano">Italiano</label>
         </fieldset>
         <fieldset>
