@@ -2,7 +2,7 @@
 $nombre = $_POST['c_nombre'] ?? null;
 $apellido = $_POST['c_apellido'] ?? null;
 $genero = $_POST['c_genero'] ?? null;
-$idiomas = $_POST['c_idioma'] ?? null;
+$idiomasEst = $_POST['c_idioma'] ?? null; $idiomasLista = array("ES","EN","FR","POR","ITA");
 $fechaNacimiento = $_POST['c_fechaNacimiento'] ?? null;
 $ciudadNacimiento = $_POST['c_ciudadNacimiento'] ?? null;
 $correo = $_POST['c_correo'] ?? null;
@@ -38,15 +38,15 @@ $clave = $_POST['c_clave'] ?? null;
         </fieldset>
         <fieldset name="seleccion-idioma">
             <legend>Idioma:</legend>
-            <input type="checkbox" name="c_idioma[]" id="español" value="Español" <?php if(in_array("Español", $idiomas)) echo "checked"; ?>>
+            <input type="checkbox" name="c_idioma[]" id="español" value="ES" <?php if(!empty($idiomasEst)&&in_array("ES",$idiomasEst)) echo "checked"; ?>>
             <label for="español">Español</label>
-            <input type="checkbox" name="c_idioma[]" id="ingles" value="Inglés" <?php if(in_array("Inglés", $idiomas)) echo "checked"; ?>>
+            <input type="checkbox" name="c_idioma[]" id="ingles" value="EN" <?php if(!empty($idiomasEst)&&in_array("EN",$idiomasEst)) echo "checked"; ?>>
             <label for="ingles">Inglés</label>
-            <input type="checkbox" name="c_idioma[]" id="frances" value="Francés" <?php if(in_array("Francés", $idiomas)) echo "checked"; ?>>
+            <input type="checkbox" name="c_idioma[]" id="frances" value="FR" <?php if(!empty($idiomasEst)&&in_array("FR",$idiomasEst,false)) echo "checked"; ?>>
             <label for="frances">Francés</label>
-            <input type="checkbox" name="c_idioma[]" id="portugues" value="Portugués" <?php if(in_array("Portugués", $idiomas)) echo "checked"; ?>>
+            <input type="checkbox" name="c_idioma[]" id="portugues" value="POR" <?php if(!empty($idiomasEst)&&in_array("POR",$idiomasEst,false)) echo "checked"; ?>>
             <label for="portugues">Portugués</label>
-            <input type="checkbox" name="c_idioma[]" id="italiano" value="Italiano" <?php if(in_array("Italiano", $idiomas)) echo "checked"; ?>>
+            <input type="checkbox" name="c_idioma[]" id="italiano" value="ITA" <?php if(!empty($idiomasEst)&&in_array("ITA",$idiomasEst,false)) echo "checked"; ?>>
             <label for="Italiano">Italiano</label>
         </fieldset>
         <fieldset>
@@ -78,7 +78,7 @@ $clave = $_POST['c_clave'] ?? null;
         $infoEstudiante[] = $nombre;
         $infoEstudiante[] = $apellido;
         $infoEstudiante[] = $genero;
-        $infoEstudiante[] = $idiomas;
+        $infoEstudiante[] = $idiomasEst;
         $infoEstudiante[] = $fechaNacimiento;
         $infoEstudiante[] = $ciudadNacimiento;
         $infoEstudiante[] = $correo;
