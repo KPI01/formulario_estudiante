@@ -9,4 +9,4 @@ Este formulario consiste en solicitar el nombre, apellido, genero, idiomas que h
 [] La fecha de nacimiento debe recogerse de un `<input type='date'>`
 [] Se debe validar que el correo este en formato adecuado, realizando la comprobacion en PHP
 [] La clave debe tener una cierta complejidad: al menos 10 caracteres, al menos 1 mayuscula, al menos 1 digito y al menos 1 caracter especial
-[] Al momento de enviar los datos, tanto si son correctos como no, los datos escritos deben mantenerse en el formulario
+[X] Al momento de enviar los datos, tanto si son correctos como no, los datos escritos deben mantenerse en el formulario
