@@ -88,61 +88,43 @@ $clave = $_POST['c_clave'] ?? null;
 
         //Primero se comprueba que se hizo click en el boton para enviar los datos
         if (isset($_POST["boton-enviar"])) {
-            //Se hace un bucle Do y se crea una variable contadora
+            //Se hace un bucle While y se crea una variable contadora
             $i = 0;
-            while ($i < count($estudiante)) {
-                if (!is_array($estudiante[$i])) {
-                    if (empty($estudiante[$i])) {
-                        switch ($i) {
-                            case 1:
-                                echo "<p class='error'>* Debes seleccionar un género</p>";
-                        }
+            while ($i<count($estudiante)) {
+
+                if (is_array($estudiante[$i])) {
+
+                    switch ($i) {
+
+                        //Caso: Nombre completo
+                        case 0:
+                            
+
+                        //Caso: Idiomas que habla
+                        case 2:
+                        
+                        //Caso: Datos de nacimiento
+                        case 3:
+
+                        //Caso: Usuario
+                        case 4:
+
+
                     }
+
                 } else {
-                    for ($j = 0; $j < count($estudiante[$i]); $j++) {
-                        switch ($i) {
-                            case 0:
-                                if (isset($estudiante[$i][$j]) && empty($estudiante[$i][$j])) {
-                                    switch ($j) {
-                                        case 0:
-                                            echo "<p class='error'>* Debes colocar tu nombre</p>";
-                                            break;
-                                        case 1:
-                                            echo "<p class='error'>* Debes colocar tu apellido</p>";
-                                            break;
-                                    }
-                                } else if (!empty($estudiante[$i][$j]) && preg_match('~[0-9]~',$estudiante[$i][$j])) {
-                                        switch ($j) {
-                                            case 0:
-                                                echo "<p class='error'>* El nombre no puede llevar números</p>";
-                                                break;
-                                            case 1:
-                                                echo "<p class='error'>* El apellido no puede llevar números</p>";
-                                                break;
-                                    }
-                                } else if (isset($estudiante[$i][$j]) && (strlen($estudiante[$i][$j])<4||strlen($estudiante[$i][$j])>12)) {
-                                    switch ($j) {
-                                        case 0:
-                                            echo "<p class='error'>* El nombre debe tener entre 4 y 12 caracteres</p>";
-                                            break;
-                                        case 1:
-                                            echo "<p class='error'>* El apellido debe tener entre 4 y 12 caracteres</p>";
-                                            break;
-                                }
-                                }
-                                break;
-                            case 2:
-                                echo $estudiante[$i][$j];
-                                break;
-                            case 3:
-                                break;
-                            case 4:
-                                break;
-                        }
+
+                    switch ($i) {
+
+                        //Caso: 
+                        case 1:
+
+
                     }
+
                 }
 
-                $i += 1;
+                $i+=1;
             }
         }
         ?>
