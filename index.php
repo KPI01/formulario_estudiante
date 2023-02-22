@@ -2,7 +2,7 @@
 $nombre = $_POST['c_nombre'] ?? null;
 $apellido = $_POST['c_apellido'] ?? null;
 $genero = $_POST['c_genero'] ?? null;
-$idiomasEst = $_POST['c_idioma'] ?? null;
+$idiomas = $_POST['c_idioma'] ?? null;
 $fechaNacimiento = $_POST['c_fechaNacimiento'] ?? null;
 $ciudadNacimiento = $_POST['c_ciudadNacimiento'] ?? null;
 $correo = $_POST['c_correo'] ?? null;
@@ -40,15 +40,15 @@ $clave = $_POST['c_clave'] ?? null;
         </fieldset>
         <fieldset name="seleccion-idioma">
             <legend>Idiomas que habla</legend>
-            <input type="checkbox" name="c_idioma[]" id="español" value="Español" <?php if (!empty($idiomasEst) && in_array("Español", $idiomasEst)) echo "checked"; ?>>
+            <input type="checkbox" name="c_idioma[]" id="español" value="Español" <?php if (!empty($idiomas) && in_array("Español", $idiomas)) echo "checked"; ?>>
             <label for="español">Español</label>
-            <input type="checkbox" name="c_idioma[]" id="ingles" value="Inglés" <?php if (!empty($idiomasEst) && in_array("Inglés", $idiomasEst)) echo "checked"; ?>>
+            <input type="checkbox" name="c_idioma[]" id="ingles" value="Inglés" <?php if (!empty($idiomas) && in_array("Inglés", $idiomas)) echo "checked"; ?>>
             <label for="ingles">Inglés</label>
-            <input type="checkbox" name="c_idioma[]" id="frances" value="Francés" <?php if (!empty($idiomasEst) && in_array("Francés", $idiomasEst, false)) echo "checked"; ?>>
+            <input type="checkbox" name="c_idioma[]" id="frances" value="Francés" <?php if (!empty($idiomas) && in_array("Francés", $idiomas, false)) echo "checked"; ?>>
             <label for="frances">Francés</label>
-            <input type="checkbox" name="c_idioma[]" id="portugues" value="Portugués" <?php if (!empty($idiomasEst) && in_array("Portugués", $idiomasEst, false)) echo "checked"; ?>>
+            <input type="checkbox" name="c_idioma[]" id="portugues" value="Portugués" <?php if (!empty($idiomas) && in_array("Portugués", $idiomas, false)) echo "checked"; ?>>
             <label for="portugues">Portugués</label>
-            <input type="checkbox" name="c_idioma[]" id="italiano" value="Italiano" <?php if (!empty($idiomasEst) && in_array("Italiano", $idiomasEst, false)) echo "checked"; ?>>
+            <input type="checkbox" name="c_idioma[]" id="italiano" value="Italiano" <?php if (!empty($idiomas) && in_array("Italiano", $idiomas, false)) echo "checked"; ?>>
             <label for="Italiano">Italiano</label>
         </fieldset>
         <fieldset name='datos-nacimiento'>
@@ -57,7 +57,7 @@ $clave = $_POST['c_clave'] ?? null;
             <input type="date" name="c_fechaNacimiento" value="<?php echo $fechaNacimiento ?? '' ?>">
             <label for="c_ciudadNacimiento">Ciudad:</label>
             <select name="c_ciudadNacimiento" id="c_ciudadNacimiento">
-                <option value="" disabled selected>Selecciona una ciudad</option>
+                <option value=""disabled selected>Selecciona una ciudad</option>
                 <option value="Maracay" <?php if (!empty($ciudadNacimiento) && $ciudadNacimiento == "Maracay") echo "selected" ?>>Maracay</option>
                 <option value="Caracas" <?php if (!empty($ciudadNacimiento) && $ciudadNacimiento == "Caracas") echo "selected" ?>>Caracas</option>
                 <option value="Valencia" <?php if (!empty($ciudadNacimiento) && $ciudadNacimiento == "Valencia") echo "selected" ?>>Valencia</option>
@@ -82,7 +82,7 @@ $clave = $_POST['c_clave'] ?? null;
         //Se guardan todos los datos en un array
         $estudiante[0] = array($nombre, $apellido);
         $estudiante[1] = $genero;
-        $estudiante[2] = $idiomasEst;
+        $estudiante[2] = $idiomas;
         $estudiante[3] = array($fechaNacimiento, $ciudadNacimiento);
         $estudiante[4] = array($correo, $clave);
 
@@ -90,41 +90,120 @@ $clave = $_POST['c_clave'] ?? null;
         if (isset($_POST["boton-enviar"])) {
             //Se hace un bucle While y se crea una variable contadora
             $i = 0;
-            while ($i<count($estudiante)) {
+            while ($i < count($estudiante)) {
 
-                if (is_array($estudiante[$i])) {
-
+                if (is_null($estudiante[$i])) {
                     switch ($i) {
 
-                        //Caso: Nombre completo
-                        case 0:
-                            
+                        //Caso: género
+                        case 1:
+                            if (empty($estudiante[$i])) echo "<p class='error'>* Debes seleccionar el género</p>";
+                            break;
 
-                        //Caso: Idiomas que habla
+                        //Caso: idiomas
                         case 2:
-                        
-                        //Caso: Datos de nacimiento
-                        case 3:
-
-                        //Caso: Usuario
-                        case 4:
-
-
+                            echo "<p class='error'>* Debes seleccionar los idiomas</p>";
+                            break;
                     }
-
                 } else {
 
-                    switch ($i) {
+                    if (is_array($estudiante[$i])) {
 
-                        //Caso: 
-                        case 1:
+                        switch ($i) {
 
+                            //Caso: nombre
+                            case 0:
+                                for ($j=0;$j<count($estudiante[$i]);$j++) {
+                                    //Se comprueba que no esté vacío
+                                    if (isset($estudiante[$i][$j])&&empty($estudiante[$i][$j])) {
+                                        switch ($j) {
+                                            //Caso: nombre
+                                            case 0:
+                                                echo "<p class='error'>* Debes ingresar el nombre</p>";
+                                                break;
+                                            
+                                            //Caso: apellido
+                                            case 1:
+                                                echo "<p class='error'>* Debes ingresar el apellido</p>";
+                                                break;
+                                        }
+                                    //Se comprueba que los campos del nombre no tengan números
+                                    } elseif (isset($estudiante[$i][$j])&&preg_match("~[0-9]~", $estudiante[$i][$j])) {
+                                        switch ($j) {
+                                            //Caso: nombre
+                                            case 0:
+                                                echo "<p class='error'>* El nombre no puede contener números</p>";
+                                                break;
+                                            
+                                            //Caso: apellido
+                                            case 1:
+                                                echo "<p class='error'>* El apellido no puede contener números</p>";
+                                                break;
+                                        }
+                                    //Se comprueba que no tenga caracteres especiales
+                                    } elseif (isset($estudiante[$i][$j])&&preg_match("/[\'^£$%&*()}{@#~?><>,|=_+¬-]/",$estudiante[$i][$j])) {
+                                        switch ($j) {
+                                            //Caso: nombre
+                                            case 0:
+                                                echo "<p class='error'>* El nombre no puede contener caracteres especiales</p>";
+                                                break;
+                                            
+                                            //Caso: apellido
+                                            case 1:
+                                                echo "<p class='error'>* El apellido no puede contener caracteres especiales</p>";
+                                                break;
+                                        }
+                                    }
+                                }
+                                break;
+                            
+                            //Caso: idiomas
+                            case 2:
+                                if (count($estudiante[$i])<3) echo "<p class='error'>* Debes seleccionar al menos 3 idiomas</p>";
+                                break;
 
+                            //Caso: datos de nacimiento
+                            case 3:
+                                for ($j=0;$j<count($estudiante[$i]);$j++) {
+                                    if (isset($estudiante[$i][$j])||empty($estudiante[$i][$j])) {
+                                        switch ($j) {
+                                            //Caso: fecha
+                                            case 0:
+                                                echo "<p class='error'>* Debes ingresar la fecha de nacimiento</p>";
+                                                break;
+                                            
+                                            //Caso: ciudad
+                                            case 1:
+                                                echo "<p class='error'>* Debes seleccionar una ciudad de nacimiento</p>";
+                                                break;
+                                        }
+                                    }
+                                }
+                                break;
+
+                            //Caso: usuario
+                            case 4:
+                                for ($j=0;$j<count($estudiante[$i]);$j++) {
+                                    if (isset($estudiante[$i][$j])&&empty($estudiante[$i][$j])) {
+                                        switch ($j) {
+                                            //Caso: correo
+                                            case 0:
+                                                echo "<p class='error'>* Debes ingresar un correo</p>";
+                                                break;
+                                            
+                                            //Caso: clave
+                                            case 1:
+                                                echo "<p class='error'>* Debes seleccionar una clave</p>";
+                                                break;
+                                        }
+                                    }
+                                }
+                        }
+                
                     }
 
-                }
-
-                $i+=1;
+                }    
+                $i += 1;
             }
         }
         ?>
