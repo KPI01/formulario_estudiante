@@ -97,7 +97,9 @@ $clave = $_POST['c_clave'] ?? null;
 
                         //Caso: género
                         case 1:
-                            if (empty($estudiante[$i])) echo "<p class='error'>* Debes seleccionar el género</p>";
+                            if (empty($estudiante[$i])) {echo "<p class='error'>* Debes seleccionar el género</p>";} else {
+                                echo "<p class='confirmacion'>- Se ha ingresado el género correctamente</p>";
+                            }
                             break;
 
                         //Caso: idiomas
@@ -141,7 +143,7 @@ $clave = $_POST['c_clave'] ?? null;
                                                 break;
                                         }
                                     //Se comprueba que no tenga caracteres especiales
-                                    } elseif (isset($estudiante[$i][$j])&&preg_match("/[\'^£$%&*()}{@#~?><>,|=_+¬-]/",$estudiante[$i][$j])) {
+                                    } elseif (isset($estudiante[$i][$j])&&preg_match("/[\'^£€$%&*()}{@#~?><>,|=_+¬-]/",$estudiante[$i][$j])) {
                                         switch ($j) {
                                             //Caso: nombre
                                             case 0:
@@ -153,31 +155,39 @@ $clave = $_POST['c_clave'] ?? null;
                                                 echo "<p class='error'>* El apellido no puede contener caracteres especiales</p>";
                                                 break;
                                         }
+                                    } else {
+                                        echo "<p class='confirmacion'>- El nombre y el apellido han sido escritos correctamente</p>";
                                     }
                                 }
                                 break;
                             
                             //Caso: idiomas
                             case 2:
-                                if (count($estudiante[$i])<3) echo "<p class='error'>* Debes seleccionar al menos 3 idiomas</p>";
+                                if (count($estudiante[$i])<3) {echo "<p class='error'>* Debes seleccionar al menos 3 idiomas</p>";
+                                } else {
+                                    echo "<p class='confirmacion'>- Se han seleccionado los idiomas correctamente</p>";
+                                };
                                 break;
 
                             //Caso: datos de nacimiento
                             case 3:
                                 for ($j=0;$j<count($estudiante[$i]);$j++) {
-                                    if (isset($estudiante[$i][$j])||empty($estudiante[$i][$j])) {
                                         switch ($j) {
                                             //Caso: fecha
                                             case 0:
-                                                echo "<p class='error'>* Debes ingresar la fecha de nacimiento</p>";
+                                                if (isset($estudiante[$i][$j])&&empty($estudiante[$i][$j])) {echo "<p class='error'>* Debes ingresar la fecha de nacimiento</p>";} else {
+                                                    echo "<p class='confirmacion'>- Se ha ingresado la fecha correctamente</p>";
+                                                }
                                                 break;
                                             
                                             //Caso: ciudad
                                             case 1:
-                                                echo "<p class='error'>* Debes seleccionar una ciudad de nacimiento</p>";
+                                                if (empty($estudiante[$i][$j])) {echo "<p class='error'>* Debes seleccionar una ciudad de nacimiento</p>";} else {
+                                                    echo "<p class='confirmacion'>- Se ha seleccionado la ciudad correctamente</p>";
+                                                }
+                                                
                                                 break;
                                         }
-                                    }
                                 }
                                 break;
 
@@ -193,7 +203,23 @@ $clave = $_POST['c_clave'] ?? null;
                                             
                                             //Caso: clave
                                             case 1:
-                                                echo "<p class='error'>* Debes seleccionar una clave</p>";
+                                                echo "<p class='error'>* Debes ingresar una clave</p>";
+                                                break;
+                                        }
+                                    } else {
+                                        switch ($j) {
+                                            //Caso: correo
+                                            case 0:
+                                                if (!empty($estudiante[$i][$j])&&!filter_var($estudiante[$i][$j], FILTER_VALIDATE_EMAIL)) {echo "<p class='error'>* Debes ingresar un correo válido</p>";} else {
+                                                    echo "<p class='confirmacion'>- Se ha ingresado el correo correctamente</p>";
+                                                }
+                                                break;
+                                            
+                                            //Caso: clave
+                                            case 1:
+                                                if (strlen($estudiante[$i][$j])<10||!preg_match("@[A-Z]@",$estudiante[$i][$j])||!preg_match("@[0-9]@",$estudiante[$i][$j])||!preg_match("/[\'^£€$%&*()}{@#~?><>,|=_+¬-]/", $estudiante[$i][$j])) {echo "<p class='error'>* La clave debe tener al menos 10 caracteres, 1 número y 1 carácter especial</p>";} else {
+                                                    echo "<p class='confirmacion'>- Se ha ingresado la clave correctamente</p>";
+                                                }
                                                 break;
                                         }
                                     }
@@ -261,5 +287,9 @@ $clave = $_POST['c_clave'] ?? null;
     .error {
         color: red;
         z-index: 0;
+    }
+
+    .confirmacion {
+        color: green;
     }
 </style>
